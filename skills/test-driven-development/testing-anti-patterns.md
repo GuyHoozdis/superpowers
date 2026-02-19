@@ -1,14 +1,13 @@
 # Testing Anti-Patterns
-
 **Load this reference when:** writing or changing tests, adding mocks, or tempted to add test-only methods to production code.
 
 ## Overview
-
 Tests must verify real behavior, not mock behavior. Mocks are a means to isolate, not the thing being tested.
 
 **Core principle:** Test what the code does, not what the mocks do.
 
 **Following strict TDD prevents these anti-patterns.**
+
 
 ## The Iron Laws
 
@@ -18,8 +17,8 @@ Tests must verify real behavior, not mock behavior. Mocks are a means to isolate
 3. NEVER mock without understanding dependencies
 ```
 
-## Anti-Pattern 1: Testing Mock Behavior
 
+## Anti-Pattern 1: Testing Mock Behavior
 **The violation:**
 ```typescript
 // ❌ BAD: Testing that the mock exists
@@ -60,8 +59,8 @@ BEFORE asserting on any mock element:
   Test real behavior instead
 ```
 
-## Anti-Pattern 2: Test-Only Methods in Production
 
+## Anti-Pattern 2: Test-Only Methods in Production
 **The violation:**
 ```typescript
 // ❌ BAD: destroy() only used in tests
@@ -115,8 +114,8 @@ BEFORE adding any method to production class:
     STOP - Wrong class for this method
 ```
 
-## Anti-Pattern 3: Mocking Without Understanding
 
+## Anti-Pattern 3: Mocking Without Understanding
 **The violation:**
 ```typescript
 // ❌ BAD: Mock breaks test logic
@@ -174,8 +173,8 @@ BEFORE mocking any method:
     - Mocking without understanding the dependency chain
 ```
 
-## Anti-Pattern 4: Incomplete Mocks
 
+## Anti-Pattern 4: Incomplete Mocks
 **The violation:**
 ```typescript
 // ❌ BAD: Partial mock - only fields you think you need
@@ -225,8 +224,8 @@ BEFORE creating mock responses:
   If uncertain: Include all documented fields
 ```
 
-## Anti-Pattern 5: Integration Tests as Afterthought
 
+## Anti-Pattern 5: Integration Tests as Afterthought
 **The violation:**
 ```
 ✅ Implementation complete
@@ -248,8 +247,8 @@ TDD cycle:
 4. THEN claim complete
 ```
 
-## When Mocks Become Too Complex
 
+## When Mocks Become Too Complex
 **Warning signs:**
 - Mock setup longer than test logic
 - Mocking everything to make test pass
@@ -260,8 +259,8 @@ TDD cycle:
 
 **Consider:** Integration tests with real components often simpler than complex mocks
 
-## TDD Prevents These Anti-Patterns
 
+## TDD Prevents These Anti-Patterns
 **Why TDD helps:**
 1. **Write test first** → Forces you to think about what you're actually testing
 2. **Watch it fail** → Confirms test tests real behavior, not mocks
@@ -270,8 +269,8 @@ TDD cycle:
 
 **If you're testing mock behavior, you violated TDD** - you added mocks without watching test fail against real code first.
 
-## Quick Reference
 
+## Quick Reference
 | Anti-Pattern | Fix |
 |--------------|-----|
 | Assert on mock elements | Test real component or unmock it |
@@ -281,8 +280,8 @@ TDD cycle:
 | Tests as afterthought | TDD - tests first |
 | Over-complex mocks | Consider integration tests |
 
-## Red Flags
 
+## Red Flags
 - Assertion checks for `*-mock` test IDs
 - Methods only called in test files
 - Mock setup is >50% of test
@@ -290,8 +289,8 @@ TDD cycle:
 - Can't explain why mock is needed
 - Mocking "just to be safe"
 
-## The Bottom Line
 
+## The Bottom Line
 **Mocks are tools to isolate, not things to test.**
 
 If TDD reveals you're testing mock behavior, you've gone wrong.

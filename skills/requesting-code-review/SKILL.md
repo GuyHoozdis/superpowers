@@ -3,14 +3,13 @@ name: requesting-code-review
 description: Use when completing tasks, implementing major features, or before merging to verify work meets requirements
 ---
 
-# Requesting Code Review
 
+# Requesting Code Review
 Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 
 **Core principle:** Review early, review often.
 
 ## When to Request Review
-
 **Mandatory:**
 - After each task in subagent-driven development
 - After completing major feature
@@ -21,8 +20,8 @@ Dispatch superpowers:code-reviewer subagent to catch issues before they cascade.
 - Before refactoring (baseline check)
 - After fixing complex bug
 
-## How to Request
 
+## How to Request
 **1. Get git SHAs:**
 ```bash
 BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
@@ -45,6 +44,7 @@ Use Task tool with superpowers:code-reviewer type, fill template at `code-review
 - Fix Important issues before proceeding
 - Note Minor issues for later
 - Push back if reviewer is wrong (with reasoning)
+
 
 ## Example
 
@@ -74,8 +74,8 @@ You: [Fix progress indicators]
 [Continue to Task 3]
 ```
 
-## Integration with Workflows
 
+## Integration with Workflows
 **Subagent-Driven Development:**
 - Review after EACH task
 - Catch issues before they compound
@@ -89,8 +89,8 @@ You: [Fix progress indicators]
 - Review before merge
 - Review when stuck
 
-## Red Flags
 
+## Red Flags
 **Never:**
 - Skip review because "it's simple"
 - Ignore Critical issues

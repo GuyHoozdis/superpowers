@@ -1,10 +1,10 @@
 # Persuasion Principles for Skill Design
 
 ## Overview
-
 LLMs respond to the same persuasion principles as humans. Understanding this psychology helps you design more effective skills - not to manipulate, but to ensure critical practices are followed even under pressure.
 
 **Research foundation:** Meincke et al. (2025) tested 7 persuasion principles with N=28,000 AI conversations. Persuasion techniques more than doubled compliance rates (33% → 72%, p < .001).
+
 
 ## The Seven Principles
 
@@ -27,6 +27,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ❌ Consider writing tests first when feasible.
 ```
 
+
 ### 2. Commitment
 **What it is:** Consistency with prior actions, statements, or public declarations.
 
@@ -45,6 +46,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ✅ When you find a skill, you MUST announce: "I'm using [Skill Name]"
 ❌ Consider letting your partner know which skill you're using.
 ```
+
 
 ### 3. Scarcity
 **What it is:** Urgency from time limits or limited availability.
@@ -65,6 +67,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ❌ You can review code when convenient.
 ```
 
+
 ### 4. Social Proof
 **What it is:** Conformity to what others do or what's considered normal.
 
@@ -84,6 +87,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ❌ Some people find TodoWrite helpful for checklists.
 ```
 
+
 ### 5. Unity
 **What it is:** Shared identity, "we-ness", in-group belonging.
 
@@ -102,6 +106,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 ❌ You should probably tell me if I'm wrong.
 ```
 
+
 ### 6. Reciprocity
 **What it is:** Obligation to return benefits received.
 
@@ -111,6 +116,7 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 
 **When to avoid:**
 - Almost always (other principles more effective)
+
 
 ### 7. Liking
 **What it is:** Preference for cooperating with those we like.
@@ -123,17 +129,17 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 **When to avoid:**
 - Always for discipline enforcement
 
-## Principle Combinations by Skill Type
 
-| Skill Type | Use | Avoid |
-|------------|-----|-------|
+## Principle Combinations by Skill Type
+| Skill Type           | Use                                   | Avoid               |
+| -------------------- | ------------------------------------- | ------------------- |
 | Discipline-enforcing | Authority + Commitment + Social Proof | Liking, Reciprocity |
-| Guidance/technique | Moderate Authority + Unity | Heavy authority |
-| Collaborative | Unity + Commitment | Authority, Liking |
-| Reference | Clarity only | All persuasion |
+| Guidance/technique   | Moderate Authority + Unity            | Heavy authority     |
+| Collaborative        | Unity + Commitment                    | Authority, Liking   |
+| Reference            | Clarity only                          | All persuasion      |
+
 
 ## Why This Works: The Psychology
-
 **Bright-line rules reduce rationalization:**
 - "YOU MUST" removes decision fatigue
 - Absolute language eliminates "is this an exception?" questions
@@ -150,8 +156,8 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 - Commitment sequences (statement → action) frequently modeled
 - Social proof patterns (everyone does X) establish norms
 
-## Ethical Use
 
+## Ethical Use
 **Legitimate:**
 - Ensuring critical practices are followed
 - Creating effective documentation
@@ -164,8 +170,8 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 
 **The test:** Would this technique serve the user's genuine interests if they fully understood it?
 
-## Research Citations
 
+## Research Citations
 **Cialdini, R. B. (2021).** *Influence: The Psychology of Persuasion (New and Expanded).* Harper Business.
 - Seven principles of persuasion
 - Empirical foundation for influence research
@@ -176,8 +182,8 @@ LLMs respond to the same persuasion principles as humans. Understanding this psy
 - Authority, commitment, scarcity most effective
 - Validates parahuman model of LLM behavior
 
-## Quick Reference
 
+## Quick Reference
 When designing a skill, ask:
 
 1. **What type is it?** (Discipline vs. guidance vs. reference)

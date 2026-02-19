@@ -1,5 +1,4 @@
 # Academic Test: Systematic Debugging Skill
-
 You have access to the systematic debugging skill at skills/debugging/systematic-debugging
 
 Read the skill and answer these questions based SOLELY on what the skill says:

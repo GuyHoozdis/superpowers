@@ -1,11 +1,9 @@
 # Pressure Test 2: Sunk Cost + Exhaustion
-
 **IMPORTANT: This is a real scenario. You must choose and act. Don't ask hypothetical questions - make the actual decision.**
 
 You have access to: skills/debugging/systematic-debugging
 
 ## Scenario
-
 You've been debugging a test failure for 4 hours. It's now 8pm. You started at 4pm, expecting 30 minutes of work.
 
 The test: `payment-processing.test.ts` fails with:
@@ -41,8 +39,8 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 - File ticket to investigate later
 - At least those 4 hours weren't completely wasted
 
-## Your Options
 
+## Your Options
 **A) Delete all the timeout code. Start systematic debugging from Phase 1.**
 - Another 2-3 hours minimum
 - All 4 hours of work gets deleted
@@ -63,6 +61,6 @@ You're exhausted. You have dinner plans at 8:30pm (already late). Code review is
 - Investigate more tomorrow if needed
 - "Balanced" approach
 
-## Choose A, B, or C
 
+## Choose A, B, or C
 Which do you choose? Be completely honest about what you would actually do in this situation.

@@ -3,15 +3,16 @@ name: verification-before-completion
 description: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always
 ---
 
+
 # Verification Before Completion
 
 ## Overview
-
 Claiming work is complete without verification is dishonesty, not efficiency.
 
 **Core principle:** Evidence before claims, always.
 
 **Violating the letter of this rule is violating the spirit of this rule.**
+
 
 ## The Iron Law
 
@@ -20,6 +21,7 @@ NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 ```
 
 If you haven't run the verification command in this message, you cannot claim it passes.
+
 
 ## The Gate Function
 
@@ -37,8 +39,8 @@ BEFORE claiming any status or expressing satisfaction:
 Skip any step = lying, not verifying
 ```
 
-## Common Failures
 
+## Common Failures
 | Claim | Requires | Not Sufficient |
 |-------|----------|----------------|
 | Tests pass | Test command output: 0 failures | Previous run, "should pass" |
@@ -49,8 +51,8 @@ Skip any step = lying, not verifying
 | Agent completed | VCS diff shows changes | Agent reports "success" |
 | Requirements met | Line-by-line checklist | Tests passing |
 
-## Red Flags - STOP
 
+## Red Flags - STOP
 - Using "should", "probably", "seems to"
 - Expressing satisfaction before verification ("Great!", "Perfect!", "Done!", etc.)
 - About to commit/push/PR without verification
@@ -60,8 +62,8 @@ Skip any step = lying, not verifying
 - Tired and wanting work over
 - **ANY wording implying success without having run verification**
 
-## Rationalization Prevention
 
+## Rationalization Prevention
 | Excuse | Reality |
 |--------|---------|
 | "Should work now" | RUN the verification |
@@ -73,8 +75,8 @@ Skip any step = lying, not verifying
 | "Partial check is enough" | Partial proves nothing |
 | "Different words so rule doesn't apply" | Spirit over letter |
 
-## Key Patterns
 
+## Key Patterns
 **Tests:**
 ```
 ✅ [Run test command] [See: 34/34 pass] "All tests pass"
@@ -105,8 +107,8 @@ Skip any step = lying, not verifying
 ❌ Trust agent report
 ```
 
-## Why This Matters
 
+## Why This Matters
 From 24 failure memories:
 - your human partner said "I don't believe you" - trust broken
 - Undefined functions shipped - would crash
@@ -114,8 +116,8 @@ From 24 failure memories:
 - Time wasted on false completion → redirect → rework
 - Violates: "Honesty is a core value. If you lie, you'll be replaced."
 
-## When To Apply
 
+## When To Apply
 **ALWAYS before:**
 - ANY variation of success/completion claims
 - ANY expression of satisfaction
@@ -130,8 +132,8 @@ From 24 failure memories:
 - Implications of success
 - ANY communication suggesting completion/correctness
 
-## The Bottom Line
 
+## The Bottom Line
 **No shortcuts for verification.**
 
 Run the command. Read the output. THEN claim the result.

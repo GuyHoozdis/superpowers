@@ -1,10 +1,10 @@
 # Root Cause Tracing
 
 ## Overview
-
 Bugs often manifest deep in the call stack (git init in wrong directory, file created in wrong location, database opened with wrong path). Your instinct is to fix where the error appears, but that's treating a symptom.
 
 **Core principle:** Trace backward through the call chain until you find the original trigger, then fix at the source.
+
 
 ## When to Use
 
@@ -29,12 +29,15 @@ digraph when_to_use {
 - Unclear where invalid data originated
 - Need to find which test/code triggers the problem
 
+
 ## The Tracing Process
 
 ### 1. Observe the Symptom
+
 ```
 Error: git init failed in /Users/jesse/project/packages/core
 ```
+
 
 ### 2. Find Immediate Cause
 **What code directly causes this?**
@@ -42,7 +45,9 @@ Error: git init failed in /Users/jesse/project/packages/core
 await execFileAsync('git', ['init'], { cwd: projectDir });
 ```
 
+
 ### 3. Ask: What Called This?
+
 ```typescript
 WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → called by Session.initializeWorkspace()
@@ -50,11 +55,13 @@ WorktreeManager.createSessionWorktree(projectDir, sessionId)
   → called by test at Project.create()
 ```
 
+
 ### 4. Keep Tracing Up
 **What value was passed?**
 - `projectDir = ''` (empty string!)
 - Empty string as `cwd` resolves to `process.cwd()`
 - That's the source code directory!
+
 
 ### 5. Find Original Trigger
 **Where did empty string come from?**
@@ -63,10 +70,9 @@ const context = setupCoreTest(); // Returns { tempDir: '' }
 Project.create('name', context.tempDir); // Accessed before beforeEach!
 ```
 
+
 ## Adding Stack Traces
-
 When you can't trace manually, add instrumentation:
-
 ```typescript
 // Before the problematic operation
 async function gitInit(directory: string) {
@@ -94,20 +100,19 @@ npm test 2>&1 | grep 'DEBUG git init'
 - Find the line number triggering the call
 - Identify the pattern (same test? same parameter?)
 
-## Finding Which Test Causes Pollution
 
+## Finding Which Test Causes Pollution
 If something appears during tests but you don't know which test:
 
 Use the bisection script `find-polluter.sh` in this directory:
-
 ```bash
 ./find-polluter.sh '.git' 'src/**/*.test.ts'
 ```
 
 Runs tests one-by-one, stops at first polluter. See script for usage.
 
-## Real Example: Empty projectDir
 
+## Real Example: Empty projectDir
 **Symptom:** `.git` created in `packages/core/` (source code)
 
 **Trace chain:**
@@ -126,6 +131,7 @@ Runs tests one-by-one, stops at first polluter. See script for usage.
 - Layer 2: WorkspaceManager validates not empty
 - Layer 3: NODE_ENV guard refuses git init outside tmpdir
 - Layer 4: Stack trace logging before git init
+
 
 ## Key Principle
 
@@ -153,15 +159,15 @@ digraph principle {
 
 **NEVER fix just where the error appears.** Trace back to find the original trigger.
 
-## Stack Trace Tips
 
+## Stack Trace Tips
 **In tests:** Use `console.error()` not logger - logger may be suppressed
 **Before operation:** Log before the dangerous operation, not after it fails
 **Include context:** Directory, cwd, environment variables, timestamps
 **Capture stack:** `new Error().stack` shows complete call chain
 
-## Real-World Impact
 
+## Real-World Impact
 From debugging session (2025-10-03):
 - Found root cause through 5-level trace
 - Fixed at source (getter validation)

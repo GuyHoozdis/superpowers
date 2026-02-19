@@ -1,5 +1,4 @@
 # Skill authoring best practices
-
 > Learn how to write effective Skills that Claude can discover and use successfully.
 
 Good Skills are concise, well-structured, and tested with real usage. This guide provides practical authoring decisions to help you write Skills that Claude can discover and use effectively.
@@ -9,7 +8,6 @@ For conceptual background on how Skills work, see the [Skills overview](/en/docs
 ## Core principles
 
 ### Concise is key
-
 The [context window](https://platform.claude.com/docs/en/build-with-claude/context-windows) is a public good. Your Skill shares the context window with everything else Claude needs to know, including:
 
 * The system prompt
@@ -28,7 +26,6 @@ Only add context Claude doesn't already have. Challenge each piece of informatio
 * "Does this paragraph justify its token cost?"
 
 **Good example: Concise** (approximately 50 tokens):
-
 ````markdown  theme={null}
 ## Extract PDF text
 
@@ -43,7 +40,6 @@ with pdfplumber.open("file.pdf") as pdf:
 ````
 
 **Bad example: Too verbose** (approximately 150 tokens):
-
 ```markdown  theme={null}
 ## Extract PDF text
 
@@ -56,8 +52,8 @@ First, you'll need to install it using pip. Then you can use the code below...
 
 The concise version assumes Claude knows what PDFs are and how libraries work.
 
-### Set appropriate degrees of freedom
 
+### Set appropriate degrees of freedom
 Match the level of specificity to the task's fragility and variability.
 
 **High freedom** (text-based instructions):
@@ -69,7 +65,6 @@ Use when:
 * Heuristics guide the approach
 
 Example:
-
 ```markdown  theme={null}
 ## Code review process
 
@@ -88,7 +83,6 @@ Use when:
 * Configuration affects behavior
 
 Example:
-
 ````markdown  theme={null}
 ## Generate report
 
@@ -111,7 +105,6 @@ Use when:
 * A specific sequence must be followed
 
 Example:
-
 ````markdown  theme={null}
 ## Database migration
 
@@ -129,8 +122,8 @@ Do not modify the command or add additional flags.
 * **Narrow bridge with cliffs on both sides**: There's only one safe way forward. Provide specific guardrails and exact instructions (low freedom). Example: database migrations that must run in exact sequence.
 * **Open field with no hazards**: Many paths lead to success. Give general direction and trust Claude to find the best route (high freedom). Example: code reviews where context determines the best approach.
 
-### Test with all models you plan to use
 
+### Test with all models you plan to use
 Skills act as additions to models, so effectiveness depends on the underlying model. Test your Skill with all the models you plan to use it with.
 
 **Testing considerations by model**:
@@ -141,8 +134,8 @@ Skills act as additions to models, so effectiveness depends on the underlying mo
 
 What works perfectly for Opus might need more detail for Haiku. If you plan to use your Skill across multiple models, aim for instructions that work well with all of them.
 
-## Skill structure
 
+## Skill structure
 <Note>
   **YAML Frontmatter**: The SKILL.md frontmatter supports two fields:
 
@@ -153,7 +146,6 @@ What works perfectly for Opus might need more detail for Haiku. If you plan to u
 </Note>
 
 ### Naming conventions
-
 Use consistent naming patterns to make Skills easier to reference and discuss. We recommend using **gerund form** (verb + -ing) for Skill names, as this clearly describes the activity or capability the Skill provides.
 
 **Good naming examples (gerund form)**:
@@ -182,8 +174,8 @@ Consistent naming makes it easier to:
 * Organize and search through multiple Skills
 * Maintain a professional, cohesive skill library
 
-### Writing effective descriptions
 
+### Writing effective descriptions
 The `description` field enables Skill discovery and should include both what the Skill does and when to use it.
 
 <Warning>
@@ -201,39 +193,33 @@ Each Skill has exactly one description field. The description is critical for sk
 Effective examples:
 
 **PDF Processing skill:**
-
 ```yaml  theme={null}
 description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
 ```
 
 **Excel Analysis skill:**
-
 ```yaml  theme={null}
 description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.
 ```
 
 **Git Commit Helper skill:**
-
 ```yaml  theme={null}
 description: Generate descriptive commit messages by analyzing git diffs. Use when the user asks for help writing commit messages or reviewing staged changes.
 ```
 
 Avoid vague descriptions like these:
-
 ```yaml  theme={null}
 description: Helps with documents
 ```
-
 ```yaml  theme={null}
 description: Processes data
 ```
-
 ```yaml  theme={null}
 description: Does stuff with files
 ```
 
-### Progressive disclosure patterns
 
+### Progressive disclosure patterns
 SKILL.md serves as an overview that points Claude to detailed materials as needed, like a table of contents in an onboarding guide. For an explanation of how progressive disclosure works, see [How Skills work](/en/docs/agents-and-tools/agent-skills/overview#how-skills-work) in the overview.
 
 **Practical guidance:**
@@ -243,7 +229,6 @@ SKILL.md serves as an overview that points Claude to detailed materials as neede
 * Use the patterns below to organize instructions, code, and resources effectively
 
 #### Visual overview: From simple to complex
-
 A basic Skill starts with just a SKILL.md file containing metadata and instructions:
 
 <img src="https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=87782ff239b297d9a9e8e1b72ed72db9" alt="Simple SKILL.md file showing YAML frontmatter and markdown body" data-og-width="2048" width="2048" data-og-height="1153" height="1153" data-path="images/agent-skills-simple-file.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=280&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=c61cc33b6f5855809907f7fda94cd80e 280w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=560&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=90d2c0c1c76b36e8d485f49e0810dbfd 560w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=840&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=ad17d231ac7b0bea7e5b4d58fb4aeabb 840w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=1100&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=f5d0a7a3c668435bb0aee9a3a8f8c329 1100w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=1650&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=0e927c1af9de5799cfe557d12249f6e6 1650w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-simple-file.png?w=2500&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=46bbb1a51dd4c8202a470ac8c80a893d 2500w" />
@@ -253,7 +238,6 @@ As your Skill grows, you can bundle additional content that Claude loads only wh
 <img src="https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=a5e0aa41e3d53985a7e3e43668a33ea3" alt="Bundling additional reference files like reference.md and forms.md." data-og-width="2048" width="2048" data-og-height="1327" height="1327" data-path="images/agent-skills-bundling-content.png" data-optimize="true" data-opv="3" srcset="https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=280&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=f8a0e73783e99b4a643d79eac86b70a2 280w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=560&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=dc510a2a9d3f14359416b706f067904a 560w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=840&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=82cd6286c966303f7dd914c28170e385 840w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=1100&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=56f3be36c77e4fe4b523df209a6824c6 1100w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=1650&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=d22b5161b2075656417d56f41a74f3dd 1650w, https://mintcdn.com/anthropic-claude-docs/4Bny2bjzuGBK7o00/images/agent-skills-bundling-content.png?w=2500&fit=max&auto=format&n=4Bny2bjzuGBK7o00&q=85&s=3dd4bdd6850ffcc96c6c45fcb0acd6eb 2500w" />
 
 The complete Skill directory structure might look like this:
-
 ```
 pdf/
 ├── SKILL.md              # Main instructions (loaded when triggered)
@@ -265,6 +249,7 @@ pdf/
     ├── fill_form.py      # Form filling script
     └── validate.py       # Validation script
 ```
+
 
 #### Pattern 1: High-level guide with references
 
@@ -294,10 +279,9 @@ with pdfplumber.open("file.pdf") as pdf:
 
 Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
 
+
 #### Pattern 2: Domain-specific organization
-
 For Skills with multiple domains, organize content by domain to avoid loading irrelevant context. When a user asks about sales metrics, Claude only needs to read sales-related schemas, not finance or marketing data. This keeps token usage low and context focused.
-
 ```
 bigquery-skill/
 ├── SKILL.md (overview and navigation)
@@ -307,7 +291,6 @@ bigquery-skill/
     ├── product.md (API usage, features)
     └── marketing.md (campaigns, attribution)
 ```
-
 ````markdown SKILL.md theme={null}
 # BigQuery Data Analysis
 
@@ -329,10 +312,9 @@ grep -i "api usage" reference/product.md
 ```
 ````
 
+
 #### Pattern 3: Conditional details
-
 Show basic content, link to advanced content:
-
 ```markdown  theme={null}
 # DOCX Processing
 
@@ -350,14 +332,13 @@ For simple edits, modify the XML directly.
 
 Claude reads REDLINING.md or OOXML.md only when the user needs those features.
 
-### Avoid deeply nested references
 
+### Avoid deeply nested references
 Claude may partially read files when they're referenced from other referenced files. When encountering nested references, Claude might use commands like `head -100` to preview content rather than reading entire files, resulting in incomplete information.
 
 **Keep references one level deep from SKILL.md**. All reference files should link directly from SKILL.md to ensure Claude reads complete files when needed.
 
 **Bad example: Too deep**:
-
 ```markdown  theme={null}
 # SKILL.md
 See [advanced.md](advanced.md)...
@@ -370,7 +351,6 @@ Here's the actual information...
 ```
 
 **Good example: One level deep**:
-
 ```markdown  theme={null}
 # SKILL.md
 
@@ -380,12 +360,11 @@ Here's the actual information...
 **Examples**: See [examples.md](examples.md)
 ```
 
-### Structure longer reference files with table of contents
 
+### Structure longer reference files with table of contents
 For reference files longer than 100 lines, include a table of contents at the top. This ensures Claude can see the full scope of available information even when previewing with partial reads.
 
 **Example**:
-
 ```markdown  theme={null}
 # API Reference
 
@@ -407,14 +386,13 @@ Claude can then read the complete file or jump to specific sections as needed.
 
 For details on how this filesystem-based architecture enables progressive disclosure, see the [Runtime environment](#runtime-environment) section in the Advanced section below.
 
+
 ## Workflows and feedback loops
 
 ### Use workflows for complex tasks
-
 Break complex operations into clear, sequential steps. For particularly complex workflows, provide a checklist that Claude can copy into its response and check off as it progresses.
 
 **Example 1: Research synthesis workflow** (for Skills without code):
-
 ````markdown  theme={null}
 ## Research synthesis workflow
 
@@ -456,7 +434,6 @@ Check that every claim references the correct source document. If citations are 
 This example shows how workflows apply to analysis tasks that don't require code. The checklist pattern works for any complex, multi-step process.
 
 **Example 2: PDF form filling workflow** (for Skills with code):
-
 ````markdown  theme={null}
 ## PDF form filling workflow
 
@@ -500,14 +477,13 @@ If verification fails, return to Step 2.
 
 Clear steps prevent Claude from skipping critical validation. The checklist helps both Claude and you track progress through multi-step workflows.
 
-### Implement feedback loops
 
+### Implement feedback loops
 **Common pattern**: Run validator → fix errors → repeat
 
 This pattern greatly improves output quality.
 
 **Example 1: Style guide compliance** (for Skills without code):
-
 ```markdown  theme={null}
 ## Content review process
 
@@ -527,7 +503,6 @@ This pattern greatly improves output quality.
 This shows the validation loop pattern using reference documents instead of scripts. The "validator" is STYLE\_GUIDE.md, and Claude performs the check by reading and comparing.
 
 **Example 2: Document editing process** (for Skills with code):
-
 ```markdown  theme={null}
 ## Document editing process
 
@@ -544,21 +519,19 @@ This shows the validation loop pattern using reference documents instead of scri
 
 The validation loop catches errors early.
 
+
 ## Content guidelines
 
 ### Avoid time-sensitive information
-
 Don't include information that will become outdated:
 
 **Bad example: Time-sensitive** (will become wrong):
-
 ```markdown  theme={null}
 If you're doing this before August 2025, use the old API.
 After August 2025, use the new API.
 ```
 
 **Good example** (use "old patterns" section):
-
 ```markdown  theme={null}
 ## Current method
 
@@ -577,8 +550,8 @@ This endpoint is no longer supported.
 
 The old patterns section provides historical context without cluttering the main content.
 
-### Use consistent terminology
 
+### Use consistent terminology
 Choose one term and use it throughout the Skill:
 
 **Good - Consistent**:
@@ -595,14 +568,13 @@ Choose one term and use it throughout the Skill:
 
 Consistency helps Claude understand and follow instructions.
 
+
 ## Common patterns
 
 ### Template pattern
-
 Provide templates for output format. Match the level of strictness to your needs.
 
 **For strict requirements** (like API responses or data formats):
-
 ````markdown  theme={null}
 ## Report structure
 
@@ -626,7 +598,6 @@ ALWAYS use this exact template structure:
 ````
 
 **For flexible guidance** (when adaptation is useful):
-
 ````markdown  theme={null}
 ## Report structure
 
@@ -648,10 +619,9 @@ Here is a sensible default format, but use your best judgment based on the analy
 Adjust sections as needed for the specific analysis type.
 ````
 
+
 ### Examples pattern
-
 For Skills where output quality depends on seeing examples, provide input/output pairs just like in regular prompting:
-
 ````markdown  theme={null}
 ## Commit message format
 
@@ -690,10 +660,9 @@ Follow this style: type(scope): brief description, then detailed explanation.
 
 Examples help Claude understand the desired style and level of detail more clearly than descriptions alone.
 
+
 ### Conditional workflow pattern
-
 Guide Claude through decision points:
-
 ```markdown  theme={null}
 ## Document modification workflow
 
@@ -718,10 +687,10 @@ Guide Claude through decision points:
   If workflows become large or complicated with many steps, consider pushing them into separate files and tell Claude to read the appropriate file based on the task at hand.
 </Tip>
 
+
 ## Evaluation and iteration
 
 ### Build evaluations first
-
 **Create evaluations BEFORE writing extensive documentation.** This ensures your Skill solves real problems rather than documenting imagined ones.
 
 **Evaluation-driven development:**
@@ -735,7 +704,6 @@ Guide Claude through decision points:
 This approach ensures you're solving actual problems rather than anticipating requirements that may never materialize.
 
 **Evaluation structure**:
-
 ```json  theme={null}
 {
   "skills": ["pdf-processing"],
@@ -753,8 +721,8 @@ This approach ensures you're solving actual problems rather than anticipating re
   This example demonstrates a data-driven evaluation with a simple testing rubric. We do not currently provide a built-in way to run these evaluations. Users can create their own evaluation system. Evaluations are your source of truth for measuring Skill effectiveness.
 </Note>
 
-### Develop Skills iteratively with Claude
 
+### Develop Skills iteratively with Claude
 The most effective Skill development process involves Claude itself. Work with one instance of Claude ("Claude A") to create a Skill that will be used by other instances ("Claude B"). Claude A helps you design and refine instructions, while Claude B tests them in real tasks. This works because Claude models understand both how to write effective agent instructions and what information agents need.
 
 **Creating a new Skill:**
@@ -809,8 +777,8 @@ The same hierarchical pattern continues when improving Skills. You alternate bet
 
 **Why this approach works**: Claude A understands agent needs, you provide domain expertise, Claude B reveals gaps through real usage, and iterative refinement improves Skills based on observed behavior rather than assumptions.
 
-### Observe how Claude navigates Skills
 
+### Observe how Claude navigates Skills
 As you iterate on Skills, pay attention to how Claude actually uses them in practice. Watch for:
 
 * **Unexpected exploration paths**: Does Claude read files in an order you didn't anticipate? This might indicate your structure isn't as intuitive as you thought
@@ -820,10 +788,10 @@ As you iterate on Skills, pay attention to how Claude actually uses them in prac
 
 Iterate based on these observations rather than assumptions. The 'name' and 'description' in your Skill's metadata are particularly critical. Claude uses these when deciding whether to trigger the Skill in response to the current task. Make sure they clearly describe what the Skill does and when it should be used.
 
+
 ## Anti-patterns to avoid
 
 ### Avoid Windows-style paths
-
 Always use forward slashes in file paths, even on Windows:
 
 * ✓ **Good**: `scripts/helper.py`, `reference/guide.md`
@@ -831,10 +799,9 @@ Always use forward slashes in file paths, even on Windows:
 
 Unix-style paths work across all platforms, while Windows-style paths cause errors on Unix systems.
 
+
 ### Avoid offering too many options
-
 Don't present multiple approaches unless necessary:
-
 ````markdown  theme={null}
 **Bad example: Too many choices** (confusing):
 "You can use pypdf, or pdfplumber, or PyMuPDF, or pdf2image, or..."
@@ -848,16 +815,14 @@ import pdfplumber
 For scanned PDFs requiring OCR, use pdf2image with pytesseract instead."
 ````
 
-## Advanced: Skills with executable code
 
+## Advanced: Skills with executable code
 The sections below focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](#checklist-for-effective-skills).
 
 ### Solve, don't punt
-
 When writing scripts for Skills, handle error conditions rather than punting to Claude.
 
 **Good example: Handle errors explicitly**:
-
 ```python  theme={null}
 def process_file(path):
     """Process a file, creating it if it doesn't exist."""
@@ -877,7 +842,6 @@ def process_file(path):
 ```
 
 **Bad example: Punt to Claude**:
-
 ```python  theme={null}
 def process_file(path):
     # Just fail and let Claude figure it out
@@ -887,7 +851,6 @@ def process_file(path):
 Configuration parameters should also be justified and documented to avoid "voodoo constants" (Ousterhout's law). If you don't know the right value, how will Claude determine it?
 
 **Good example: Self-documenting**:
-
 ```python  theme={null}
 # HTTP requests typically complete within 30 seconds
 # Longer timeout accounts for slow connections
@@ -899,14 +862,13 @@ MAX_RETRIES = 3
 ```
 
 **Bad example: Magic numbers**:
-
 ```python  theme={null}
 TIMEOUT = 47  # Why 47?
 RETRIES = 5   # Why 5?
 ```
 
-### Provide utility scripts
 
+### Provide utility scripts
 Even if Claude could write a script, pre-made scripts offer advantages:
 
 **Benefits of utility scripts**:
@@ -928,7 +890,6 @@ The diagram above shows how executable scripts work alongside instruction files.
 For most utility scripts, execution is preferred because it's more reliable and efficient. See the [Runtime environment](#runtime-environment) section below for details on how script execution works.
 
 **Example**:
-
 ````markdown  theme={null}
 ## Utility scripts
 
@@ -960,10 +921,9 @@ python scripts/fill_form.py input.pdf fields.json output.pdf
 ```
 ````
 
+
 ### Use visual analysis
-
 When inputs can be rendered as images, have Claude analyze them:
-
 ````markdown  theme={null}
 ## Form layout analysis
 
@@ -982,8 +942,8 @@ When inputs can be rendered as images, have Claude analyze them:
 
 Claude's vision capabilities help understand layouts and structures.
 
-### Create verifiable intermediate outputs
 
+### Create verifiable intermediate outputs
 When Claude performs complex, open-ended tasks, it can make mistakes. The "plan-validate-execute" pattern catches errors early by having Claude first create a plan in a structured format, then validate that plan with a script before executing it.
 
 **Example**: Imagine asking Claude to update 50 form fields in a PDF based on a spreadsheet. Without validation, Claude might reference non-existent fields, create conflicting values, miss required fields, or apply updates incorrectly.
@@ -1001,8 +961,8 @@ When Claude performs complex, open-ended tasks, it can make mistakes. The "plan-
 
 **Implementation tip**: Make validation scripts verbose with specific error messages like "Field 'signature\_date' not found. Available fields: customer\_name, order\_total, signature\_date\_signed" to help Claude fix issues.
 
-### Package dependencies
 
+### Package dependencies
 Skills run in the code execution environment with platform-specific limitations:
 
 * **claude.ai**: Can install packages from npm and PyPI and pull from GitHub repositories
@@ -1010,8 +970,8 @@ Skills run in the code execution environment with platform-specific limitations:
 
 List required packages in your SKILL.md and verify they're available in the [code execution tool documentation](/en/docs/agents-and-tools/tool-use/code-execution-tool).
 
-### Runtime environment
 
+### Runtime environment
 Skills run in a code execution environment with filesystem access, bash commands, and code execution capabilities. For the conceptual explanation of this architecture, see [The Skills architecture](/en/docs/agents-and-tools/agent-skills/overview#the-skills-architecture) in the overview.
 
 **How this affects your authoring:**
@@ -1036,7 +996,6 @@ Skills run in a code execution environment with filesystem access, bash commands
 * **Test file access patterns**: Verify Claude can navigate your directory structure by testing with real requests
 
 **Example:**
-
 ```
 bigquery-skill/
 ├── SKILL.md (overview, points to reference files)
@@ -1050,14 +1009,13 @@ When the user asks about revenue, Claude reads SKILL.md, sees the reference to `
 
 For complete details on the technical architecture, see [How Skills work](/en/docs/agents-and-tools/agent-skills/overview#how-skills-work) in the Skills overview.
 
-### MCP tool references
 
+### MCP tool references
 If your Skill uses MCP (Model Context Protocol) tools, always use fully qualified tool names to avoid "tool not found" errors.
 
 **Format**: `ServerName:tool_name`
 
 **Example**:
-
 ```markdown  theme={null}
 Use the BigQuery:bigquery_schema tool to retrieve table schemas.
 Use the GitHub:create_issue tool to create issues.
@@ -1070,10 +1028,9 @@ Where:
 
 Without the server prefix, Claude may fail to locate the tool, especially when multiple MCP servers are available.
 
+
 ### Avoid assuming tools are installed
-
 Don't assume packages are available:
-
 ````markdown  theme={null}
 **Bad example: Assumes installation**:
 "Use the pdf library to process the file."
@@ -1088,22 +1045,21 @@ reader = PdfReader("file.pdf")
 ```"
 ````
 
+
 ## Technical notes
 
 ### YAML frontmatter requirements
-
 The SKILL.md frontmatter includes only `name` (64 characters max) and `description` (1024 characters max) fields. See the [Skills overview](/en/docs/agents-and-tools/agent-skills/overview#skill-structure) for complete structure details.
 
-### Token budgets
 
+### Token budgets
 Keep SKILL.md body under 500 lines for optimal performance. If your content exceeds this, split it into separate files using the progressive disclosure patterns described earlier. For architectural details, see the [Skills overview](/en/docs/agents-and-tools/agent-skills/overview#how-skills-work).
 
-## Checklist for effective Skills
 
+## Checklist for effective Skills
 Before sharing a Skill, verify:
 
 ### Core quality
-
 * [ ] Description is specific and includes key terms
 * [ ] Description includes both what the Skill does and when to use it
 * [ ] SKILL.md body is under 500 lines
@@ -1115,8 +1071,8 @@ Before sharing a Skill, verify:
 * [ ] Progressive disclosure used appropriately
 * [ ] Workflows have clear steps
 
-### Code and scripts
 
+### Code and scripts
 * [ ] Scripts solve problems rather than punt to Claude
 * [ ] Error handling is explicit and helpful
 * [ ] No "voodoo constants" (all values justified)
@@ -1126,15 +1082,15 @@ Before sharing a Skill, verify:
 * [ ] Validation/verification steps for critical operations
 * [ ] Feedback loops included for quality-critical tasks
 
-### Testing
 
+### Testing
 * [ ] At least three evaluations created
 * [ ] Tested with Haiku, Sonnet, and Opus
 * [ ] Tested with real usage scenarios
 * [ ] Team feedback incorporated (if applicable)
 
-## Next steps
 
+## Next steps
 <CardGroup cols={2}>
   <Card title="Get started with Agent Skills" icon="rocket" href="/en/docs/agents-and-tools/agent-skills/quickstart">
     Create your first Skill

@@ -3,15 +3,16 @@ name: systematic-debugging
 description: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes
 ---
 
+
 # Systematic Debugging
 
 ## Overview
-
 Random fixes waste time and create new bugs. Quick patches mask underlying issues.
 
 **Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.
 
 **Violating the letter of this process is violating the spirit of debugging.**
+
 
 ## The Iron Law
 
@@ -21,8 +22,8 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 
 If you haven't completed Phase 1, you cannot propose fixes.
 
-## When to Use
 
+## When to Use
 Use for ANY technical issue:
 - Test failures
 - Bugs in production
@@ -43,12 +44,11 @@ Use for ANY technical issue:
 - You're in a hurry (rushing guarantees rework)
 - Manager wants it fixed NOW (systematic is faster than thrashing)
 
-## The Four Phases
 
+## The Four Phases
 You MUST complete each phase before proceeding to the next.
 
 ### Phase 1: Root Cause Investigation
-
 **BEFORE attempting ANY fix:**
 
 1. **Read Error Messages Carefully**
@@ -119,8 +119,8 @@ You MUST complete each phase before proceeding to the next.
    - Keep tracing up until you find the source
    - Fix at source, not at symptom
 
-### Phase 2: Pattern Analysis
 
+### Phase 2: Pattern Analysis
 **Find the pattern before fixing:**
 
 1. **Find Working Examples**
@@ -142,8 +142,8 @@ You MUST complete each phase before proceeding to the next.
    - What settings, config, environment?
    - What assumptions does it make?
 
-### Phase 3: Hypothesis and Testing
 
+### Phase 3: Hypothesis and Testing
 **Scientific method:**
 
 1. **Form Single Hypothesis**
@@ -167,8 +167,8 @@ You MUST complete each phase before proceeding to the next.
    - Ask for help
    - Research more
 
-### Phase 4: Implementation
 
+### Phase 4: Implementation
 **Fix the root cause, not the symptom:**
 
 1. **Create Failing Test Case**
@@ -212,8 +212,8 @@ You MUST complete each phase before proceeding to the next.
 
    This is NOT a failed hypothesis - this is a wrong architecture.
 
-## Red Flags - STOP and Follow Process
 
+## Red Flags - STOP and Follow Process
 If you catch yourself thinking:
 - "Quick fix for now, investigate later"
 - "Just try changing X and see if it works"
@@ -231,8 +231,8 @@ If you catch yourself thinking:
 
 **If 3+ fixes failed:** Question the architecture (see Phase 4.5)
 
-## your human partner's Signals You're Doing It Wrong
 
+## your human partner's Signals You're Doing It Wrong
 **Watch for these redirections:**
 - "Is that not happening?" - You assumed without verifying
 - "Will it show us...?" - You should have added evidence gathering
@@ -242,8 +242,8 @@ If you catch yourself thinking:
 
 **When you see these:** STOP. Return to Phase 1.
 
-## Common Rationalizations
 
+## Common Rationalizations
 | Excuse | Reality |
 |--------|---------|
 | "Issue is simple, don't need process" | Simple issues have root causes too. Process is fast for simple bugs. |
@@ -255,8 +255,8 @@ If you catch yourself thinking:
 | "I see the problem, let me fix it" | Seeing symptoms ≠ understanding root cause. |
 | "One more fix attempt" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |
 
-## Quick Reference
 
+## Quick Reference
 | Phase | Key Activities | Success Criteria |
 |-------|---------------|------------------|
 | **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |
@@ -264,8 +264,8 @@ If you catch yourself thinking:
 | **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |
 | **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |
 
-## When Process Reveals "No Root Cause"
 
+## When Process Reveals "No Root Cause"
 If systematic investigation reveals issue is truly environmental, timing-dependent, or external:
 
 1. You've completed the process
@@ -275,8 +275,8 @@ If systematic investigation reveals issue is truly environmental, timing-depende
 
 **But:** 95% of "no root cause" cases are incomplete investigation.
 
-## Supporting Techniques
 
+## Supporting Techniques
 These techniques are part of systematic debugging and available in this directory:
 
 - **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger
@@ -287,8 +287,8 @@ These techniques are part of systematic debugging and available in this director
 - **superpowers:test-driven-development** - For creating failing test case (Phase 4, Step 1)
 - **superpowers:verification-before-completion** - Verify fix worked before claiming success
 
-## Real-World Impact
 
+## Real-World Impact
 From debugging sessions:
 - Systematic approach: 15-30 minutes to fix
 - Random fixes approach: 2-3 hours of thrashing

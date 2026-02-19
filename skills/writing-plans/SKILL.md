@@ -3,10 +3,10 @@ name: writing-plans
 description: Use when you have a spec or requirements for a multi-step task, before touching code
 ---
 
+
 # Writing Plans
 
 ## Overview
-
 Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
 
 Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
@@ -17,8 +17,8 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 
-## Bite-Sized Task Granularity
 
+## Bite-Sized Task Granularity
 **Each step is one action (2-5 minutes):**
 - "Write the failing test" - step
 - "Run it to make sure it fails" - step
@@ -26,10 +26,9 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 - "Run the tests and make sure they pass" - step
 - "Commit" - step
 
+
 ## Plan Document Header
-
 **Every plan MUST start with this header:**
-
 ```markdown
 # [Feature Name] Implementation Plan
 
@@ -43,6 +42,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 ---
 ```
+
 
 ## Task Structure
 
@@ -87,6 +87,7 @@ git commit -m "feat: add specific feature"
 ```
 ````
 
+
 ## Remember
 - Exact file paths always
 - Complete code in plan (not "add validation")
@@ -94,8 +95,8 @@ git commit -m "feat: add specific feature"
 - Reference relevant skills with @ syntax
 - DRY, YAGNI, TDD, frequent commits
 
-## Execution Handoff
 
+## Execution Handoff
 After saving the plan, offer execution choice:
 
 **"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**

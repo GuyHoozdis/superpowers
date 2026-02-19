@@ -3,13 +3,14 @@ name: dispatching-parallel-agents
 description: Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies
 ---
 
+
 # Dispatching Parallel Agents
 
 ## Overview
-
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
 
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
+
 
 ## When to Use
 
@@ -42,10 +43,10 @@ digraph when_to_use {
 - Need to understand full system state
 - Agents would interfere with each other
 
+
 ## The Pattern
 
 ### 1. Identify Independent Domains
-
 Group failures by what's broken:
 - File A tests: Tool approval flow
 - File B tests: Batch completion behavior
@@ -53,13 +54,14 @@ Group failures by what's broken:
 
 Each domain is independent - fixing tool approval doesn't affect abort tests.
 
-### 2. Create Focused Agent Tasks
 
+### 2. Create Focused Agent Tasks
 Each agent gets:
 - **Specific scope:** One test file or subsystem
 - **Clear goal:** Make these tests pass
 - **Constraints:** Don't change other code
 - **Expected output:** Summary of what you found and fixed
+
 
 ### 3. Dispatch in Parallel
 
@@ -71,21 +73,20 @@ Task("Fix tool-approval-race-conditions.test.ts failures")
 // All three run concurrently
 ```
 
-### 4. Review and Integrate
 
+### 4. Review and Integrate
 When agents return:
 - Read each summary
 - Verify fixes don't conflict
 - Run full test suite
 - Integrate all changes
 
-## Agent Prompt Structure
 
+## Agent Prompt Structure
 Good agent prompts are:
 1. **Focused** - One clear problem domain
 2. **Self-contained** - All context needed to understand the problem
 3. **Specific about output** - What should the agent return?
-
 ```markdown
 Fix the 3 failing tests in src/agents/agent-tool-abort.test.ts:
 
@@ -107,8 +108,8 @@ Do NOT just increase timeouts - find the real issue.
 Return: Summary of what you found and what you fixed.
 ```
 
-## Common Mistakes
 
+## Common Mistakes
 **❌ Too broad:** "Fix all the tests" - agent gets lost
 **✅ Specific:** "Fix agent-tool-abort.test.ts" - focused scope
 
@@ -121,15 +122,15 @@ Return: Summary of what you found and what you fixed.
 **❌ Vague output:** "Fix it" - you don't know what changed
 **✅ Specific:** "Return summary of root cause and changes"
 
-## When NOT to Use
 
+## When NOT to Use
 **Related failures:** Fixing one might fix others - investigate together first
 **Need full context:** Understanding requires seeing entire system
 **Exploratory debugging:** You don't know what's broken yet
 **Shared state:** Agents would interfere (editing same files, using same resources)
 
-## Real Example from Session
 
+## Real Example from Session
 **Scenario:** 6 test failures across 3 files after major refactoring
 
 **Failures:**
@@ -155,23 +156,23 @@ Agent 3 → Fix tool-approval-race-conditions.test.ts
 
 **Time saved:** 3 problems solved in parallel vs sequentially
 
-## Key Benefits
 
+## Key Benefits
 1. **Parallelization** - Multiple investigations happen simultaneously
 2. **Focus** - Each agent has narrow scope, less context to track
 3. **Independence** - Agents don't interfere with each other
 4. **Speed** - 3 problems solved in time of 1
 
-## Verification
 
+## Verification
 After agents return:
 1. **Review each summary** - Understand what changed
 2. **Check for conflicts** - Did agents edit same code?
 3. **Run full suite** - Verify all fixes work together
 4. **Spot check** - Agents can make systematic errors
 
-## Real-World Impact
 
+## Real-World Impact
 From debugging session (2025-10-03):
 - 6 failures across 3 files
 - 3 agents dispatched in parallel

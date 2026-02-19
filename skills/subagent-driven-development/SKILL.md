@@ -3,8 +3,8 @@ name: subagent-driven-development
 description: Use when executing implementation plans with independent tasks in the current session
 ---
 
-# Subagent-Driven Development
 
+# Subagent-Driven Development
 Execute plan by dispatching fresh subagent per task, with two-stage review after each: spec compliance review first, then code quality review.
 
 **Core principle:** Fresh subagent per task + two-stage review (spec then quality) = high quality, fast iteration
@@ -34,6 +34,7 @@ digraph when_to_use {
 - Fresh subagent per task (no context pollution)
 - Two-stage review after each task: spec compliance first, then code quality
 - Faster iteration (no human-in-loop between tasks)
+
 
 ## The Process
 
@@ -82,11 +83,12 @@ digraph process {
 }
 ```
 
-## Prompt Templates
 
+## Prompt Templates
 - `./implementer-prompt.md` - Dispatch implementer subagent
 - `./spec-reviewer-prompt.md` - Dispatch spec compliance reviewer subagent
 - `./code-quality-reviewer-prompt.md` - Dispatch code quality reviewer subagent
+
 
 ## Example Workflow
 
@@ -164,8 +166,8 @@ Final reviewer: All requirements met, ready to merge
 Done!
 ```
 
-## Advantages
 
+## Advantages
 **vs. Manual execution:**
 - Subagents follow TDD naturally
 - Fresh context per task (no confusion)
@@ -196,8 +198,8 @@ Done!
 - Review loops add iterations
 - But catches issues early (cheaper than debugging later)
 
-## Red Flags
 
+## Red Flags
 **Never:**
 - Start implementation on main/master branch without explicit user consent
 - Skip reviews (spec compliance OR code quality)
@@ -227,8 +229,8 @@ Done!
 - Dispatch fix subagent with specific instructions
 - Don't try to fix manually (context pollution)
 
-## Integration
 
+## Integration
 **Required workflow skills:**
 - **superpowers:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
 - **superpowers:writing-plans** - Creates the plan this skill executes

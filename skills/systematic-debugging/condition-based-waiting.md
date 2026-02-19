@@ -1,10 +1,10 @@
 # Condition-Based Waiting
 
 ## Overview
-
 Flaky tests often guess at timing with arbitrary delays. This creates race conditions where tests pass on fast machines but fail under load or in CI.
 
 **Core principle:** Wait for the actual condition you care about, not a guess about how long it takes.
+
 
 ## When to Use
 
@@ -31,6 +31,7 @@ digraph when_to_use {
 - Testing actual timing behavior (debounce, throttle intervals)
 - Always document WHY if using arbitrary timeout
 
+
 ## Core Pattern
 
 ```typescript
@@ -45,8 +46,8 @@ const result = getResult();
 expect(result).toBeDefined();
 ```
 
-## Quick Patterns
 
+## Quick Patterns
 | Scenario | Pattern |
 |----------|---------|
 | Wait for event | `waitFor(() => events.find(e => e.type === 'DONE'))` |
@@ -55,8 +56,8 @@ expect(result).toBeDefined();
 | Wait for file | `waitFor(() => fs.existsSync(path))` |
 | Complex condition | `waitFor(() => obj.ready && obj.value > 10)` |
 
-## Implementation
 
+## Implementation
 Generic polling function:
 ```typescript
 async function waitFor<T>(
@@ -81,8 +82,8 @@ async function waitFor<T>(
 
 See `condition-based-waiting-example.ts` in this directory for complete implementation with domain-specific helpers (`waitForEvent`, `waitForEventCount`, `waitForEventMatch`) from actual debugging session.
 
-## Common Mistakes
 
+## Common Mistakes
 **❌ Polling too fast:** `setTimeout(check, 1)` - wastes CPU
 **✅ Fix:** Poll every 10ms
 
@@ -91,6 +92,7 @@ See `condition-based-waiting-example.ts` in this directory for complete implemen
 
 **❌ Stale data:** Cache state before loop
 **✅ Fix:** Call getter inside loop for fresh data
+
 
 ## When Arbitrary Timeout IS Correct
 
@@ -106,8 +108,8 @@ await new Promise(r => setTimeout(r, 200));   // Then: wait for timed behavior
 2. Based on known timing (not guessing)
 3. Comment explaining WHY
 
-## Real-World Impact
 
+## Real-World Impact
 From debugging session (2025-10-03):
 - Fixed 15 flaky tests across 3 files
 - Pass rate: 60% → 100%

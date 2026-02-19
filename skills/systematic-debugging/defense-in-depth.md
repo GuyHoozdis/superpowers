@@ -1,13 +1,12 @@
 # Defense-in-Depth Validation
 
 ## Overview
-
 When you fix a bug caused by invalid data, adding validation at one place feels sufficient. But that single check can be bypassed by different code paths, refactoring, or mocks.
 
 **Core principle:** Validate at EVERY layer data passes through. Make the bug structurally impossible.
 
-## Why Multiple Layers
 
+## Why Multiple Layers
 Single validation: "We fixed the bug"
 Multiple layers: "We made the bug impossible"
 
@@ -17,11 +16,11 @@ Different layers catch different cases:
 - Environment guards prevent context-specific dangers
 - Debug logging helps when other layers fail
 
+
 ## The Four Layers
 
 ### Layer 1: Entry Point Validation
 **Purpose:** Reject obviously invalid input at API boundary
-
 ```typescript
 function createProject(name: string, workingDirectory: string) {
   if (!workingDirectory || workingDirectory.trim() === '') {
@@ -37,9 +36,9 @@ function createProject(name: string, workingDirectory: string) {
 }
 ```
 
+
 ### Layer 2: Business Logic Validation
 **Purpose:** Ensure data makes sense for this operation
-
 ```typescript
 function initializeWorkspace(projectDir: string, sessionId: string) {
   if (!projectDir) {
@@ -49,9 +48,9 @@ function initializeWorkspace(projectDir: string, sessionId: string) {
 }
 ```
 
+
 ### Layer 3: Environment Guards
 **Purpose:** Prevent dangerous operations in specific contexts
-
 ```typescript
 async function gitInit(directory: string) {
   // In tests, refuse git init outside temp directories
@@ -69,9 +68,9 @@ async function gitInit(directory: string) {
 }
 ```
 
+
 ### Layer 4: Debug Instrumentation
 **Purpose:** Capture context for forensics
-
 ```typescript
 async function gitInit(directory: string) {
   const stack = new Error().stack;
@@ -84,8 +83,8 @@ async function gitInit(directory: string) {
 }
 ```
 
-## Applying the Pattern
 
+## Applying the Pattern
 When you find a bug:
 
 1. **Trace the data flow** - Where does bad value originate? Where used?
@@ -93,8 +92,8 @@ When you find a bug:
 3. **Add validation at each layer** - Entry, business, environment, debug
 4. **Test each layer** - Try to bypass layer 1, verify layer 2 catches it
 
-## Example from Session
 
+## Example from Session
 Bug: Empty `projectDir` caused `git init` in source code
 
 **Data flow:**
@@ -111,8 +110,8 @@ Bug: Empty `projectDir` caused `git init` in source code
 
 **Result:** All 1847 tests passed, bug impossible to reproduce
 
-## Key Insight
 
+## Key Insight
 All four layers were necessary. During testing, each layer caught bugs the others missed:
 - Different code paths bypassed entry validation
 - Mocks bypassed business logic checks

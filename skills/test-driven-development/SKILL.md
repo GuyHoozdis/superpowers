@@ -3,18 +3,18 @@ name: test-driven-development
 description: Use when implementing any feature or bugfix, before writing implementation code
 ---
 
+
 # Test-Driven Development (TDD)
 
 ## Overview
-
 Write the test first. Watch it fail. Write minimal code to pass.
 
 **Core principle:** If you didn't watch the test fail, you don't know if it tests the right thing.
 
 **Violating the letter of the rules is violating the spirit of the rules.**
 
-## When to Use
 
+## When to Use
 **Always:**
 - New features
 - Bug fixes
@@ -27,6 +27,7 @@ Write the test first. Watch it fail. Write minimal code to pass.
 - Configuration files
 
 Thinking "skip TDD just this once"? Stop. That's rationalization.
+
 
 ## The Iron Law
 
@@ -43,6 +44,7 @@ Write code before the test? Delete it. Start over.
 - Delete means delete
 
 Implement fresh from tests. Period.
+
 
 ## Red-Green-Refactor
 
@@ -69,7 +71,6 @@ digraph tdd_cycle {
 ```
 
 ### RED - Write Failing Test
-
 Write one minimal test showing what should happen.
 
 <Good>
@@ -88,6 +89,7 @@ test('retries failed operations 3 times', async () => {
   expect(attempts).toBe(3);
 });
 ```
+
 Clear name, tests real behavior, one thing
 </Good>
 
@@ -102,6 +104,7 @@ test('retry works', async () => {
   expect(mock).toHaveBeenCalledTimes(3);
 });
 ```
+
 Vague name, tests mock not code
 </Bad>
 
@@ -110,10 +113,9 @@ Vague name, tests mock not code
 - Clear name
 - Real code (no mocks unless unavoidable)
 
+
 ### Verify RED - Watch It Fail
-
 **MANDATORY. Never skip.**
-
 ```bash
 npm test path/to/test.test.ts
 ```
@@ -127,8 +129,8 @@ Confirm:
 
 **Test errors?** Fix error, re-run until it fails correctly.
 
-### GREEN - Minimal Code
 
+### GREEN - Minimal Code
 Write simplest code to pass the test.
 
 <Good>
@@ -144,6 +146,7 @@ async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
   throw new Error('unreachable');
 }
 ```
+
 Just enough to pass
 </Good>
 
@@ -160,15 +163,15 @@ async function retryOperation<T>(
   // YAGNI
 }
 ```
+
 Over-engineered
 </Bad>
 
 Don't add features, refactor other code, or "improve" beyond the test.
 
+
 ### Verify GREEN - Watch It Pass
-
 **MANDATORY.**
-
 ```bash
 npm test path/to/test.test.ts
 ```
@@ -182,8 +185,8 @@ Confirm:
 
 **Other tests fail?** Fix now.
 
-### REFACTOR - Clean Up
 
+### REFACTOR - Clean Up
 After green only:
 - Remove duplication
 - Improve names
@@ -191,20 +194,20 @@ After green only:
 
 Keep tests green. Don't add behavior.
 
-### Repeat
 
+### Repeat
 Next failing test for next feature.
 
-## Good Tests
 
+## Good Tests
 | Quality | Good | Bad |
 |---------|------|-----|
 | **Minimal** | One thing. "and" in name? Split it. | `test('validates email and domain and whitespace')` |
 | **Clear** | Name describes behavior | `test('test1')` |
 | **Shows intent** | Demonstrates desired API | Obscures what code should do |
 
-## Why Order Matters
 
+## Why Order Matters
 **"I'll write tests after to verify it works"**
 
 Tests written after code pass immediately. Passing immediately proves nothing:
@@ -253,8 +256,8 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 
 30 minutes of tests after ≠ TDD. You get coverage, lose proof tests work.
 
-## Common Rationalizations
 
+## Common Rationalizations
 | Excuse | Reality |
 |--------|---------|
 | "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
@@ -269,8 +272,8 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 | "Manual test faster" | Manual doesn't prove edge cases. You'll re-test every change. |
 | "Existing code has no tests" | You're improving it. Add tests for existing code. |
 
-## Red Flags - STOP and Start Over
 
+## Red Flags - STOP and Start Over
 - Code before test
 - Test after implementation
 - Test passes immediately
@@ -287,8 +290,8 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 
 **All of these mean: Delete code. Start over with TDD.**
 
-## Example: Bug Fix
 
+## Example: Bug Fix
 **Bug:** Empty email accepted
 
 **RED**
@@ -324,8 +327,8 @@ PASS
 **REFACTOR**
 Extract validation for multiple fields if needed.
 
-## Verification Checklist
 
+## Verification Checklist
 Before marking work complete:
 
 - [ ] Every new function/method has a test
@@ -339,8 +342,8 @@ Before marking work complete:
 
 Can't check all boxes? You skipped TDD. Start over.
 
-## When Stuck
 
+## When Stuck
 | Problem | Solution |
 |---------|----------|
 | Don't know how to test | Write wished-for API. Write assertion first. Ask your human partner. |
@@ -348,18 +351,19 @@ Can't check all boxes? You skipped TDD. Start over.
 | Must mock everything | Code too coupled. Use dependency injection. |
 | Test setup huge | Extract helpers. Still complex? Simplify design. |
 
-## Debugging Integration
 
+## Debugging Integration
 Bug found? Write failing test reproducing it. Follow TDD cycle. Test proves fix and prevents regression.
 
 Never fix bugs without a test.
 
-## Testing Anti-Patterns
 
+## Testing Anti-Patterns
 When adding mocks or test utilities, read @testing-anti-patterns.md to avoid common pitfalls:
 - Testing mock behavior instead of real behavior
 - Adding test-only methods to production classes
 - Mocking without understanding dependencies
+
 
 ## Final Rule
 
